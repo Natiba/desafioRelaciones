@@ -3,7 +3,6 @@ package Service;
 import Entity.Product;
 import Entity.Store;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.UUID;
@@ -11,7 +10,7 @@ import java.util.UUID;
 public class StoreService {
 
     ArrayList<Store> listaTiendas = new ArrayList<>();
-    Scanner sc = new Scanner(System.in).useDelimiter("\n");
+    Scanner sc = new Scanner(System.in);
 
     public void crearTienda() {
 
@@ -39,17 +38,18 @@ public class StoreService {
         System.out.println("Ingrese el id de tienda a modificar");
         System.out.println(mostrarTienda());
         System.out.println("Elija una tienda \n"
-                + "1.Tienda 1 \n"
-                + "2. Tienda 2 \n"
-                + "3. Tienda 3 \n");
+                + "0.Tienda 1 \n"
+                + "1. Tienda 2 \n"
+                + "2. Tienda 3 \n");
         int opcionTienda = sc.nextInt();
-
+        sc.nextLine();
         // this.listaTiendas.get(opcionTienda).getIdTienda();
         UUID mod = this.listaTiendas.get(opcionTienda).getIdTienda();
         for (Store t : this.listaTiendas) {
             if (t.getIdTienda() == mod) {
                 System.out.println("Que quiere modificar, ingrese 1 para dirección o 2 para representante");
                 int opc = sc.nextInt();
+                sc.nextLine();
                 switch (opc) {
                     case 1:
                         System.out.println("ingrese la nueva dirección");
@@ -75,6 +75,7 @@ public class StoreService {
         System.out.println("Ingrese el id de la tienda a eliminar");
         System.out.println(mostrarTienda());
         UUID mod = this.listaTiendas.get(sc.nextInt()).getIdTienda();
+        sc.nextLine();
         for (Store t : this.listaTiendas) {
             if (t.getIdTienda() == mod) {
                 this.listaTiendas.remove(t);
@@ -88,10 +89,12 @@ public class StoreService {
         System.out.println("Que producto quiere agregar, ingrese el id");
         System.out.println(p);
         int idProd = sc.nextInt();
+        sc.nextLine();
         for (Product producto : p) {
             if (producto.getIdProduct() == idProd) {
                 System.out.println("Ingrese la cantidad del producto");
                Integer qty = sc.nextInt();
+               sc.nextLine();
                 t.getListaDeProductos().put(producto, qty);
             }
         }
@@ -106,6 +109,7 @@ public class StoreService {
             if (producto.getIdProduct() == idProd) {
                 System.out.println("Ingrese la cantidad del producto que queres vender");
                 int qty = sc.nextInt();
+                sc.nextLine();
                 int cantidadProd = t.getListaDeProductos().get(producto);
                 
                 if (cantidadProd >= qty) {
@@ -123,6 +127,7 @@ public class StoreService {
         System.out.println("Que producto quiere eliminar, ingrese el id");
         System.out.println(p);
         int idProd = sc.nextInt();
+        sc.nextLine();
         boolean bandera = true;
          for (Product producto : p) {
             if (producto.getIdProduct() == idProd) {
