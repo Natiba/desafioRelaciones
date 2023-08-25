@@ -1,7 +1,6 @@
 package Service;
 
 import Entity.Product;
-import Entity.Store;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -9,7 +8,7 @@ import java.util.Scanner;
 public class ProductService {
 
     private ArrayList<Product> listaProductos = new ArrayList<>();
-    Scanner sc = new Scanner(System.in).useDelimiter("\n");
+    Scanner sc = new Scanner(System.in);
     int sumarId = 1;
  
     public void crearProducto() {
@@ -40,13 +39,14 @@ public class ProductService {
         System.out.println("Que producto desea modificar? Ingrese ID");
         System.out.println(mostrarProductos());
         int auxId = sc.nextInt();
+        sc.nextLine();
         for (Product p : this.listaProductos) {
             if (p.getIdProduct() == auxId) {
                 System.out.println("Ingrese opcion a modificar: \n");
                 System.out.println("1. Nombre \n"
                         + "2. Precio \n");
                 int opc = sc.nextInt();
-
+                sc.nextLine();
                 switch (opc) {
                     case 1:
                         System.out.println("ingrese el nuevo nombre \n");
@@ -75,7 +75,7 @@ public class ProductService {
         System.out.println("Que producto desea eliminar? Ingrese ID");
         System.out.println(mostrarProductos());
         int auxId = sc.nextInt();
-
+        sc.nextLine();
         Iterator<Product> it = listaProductos.iterator();
         while (it.hasNext()) {
             if (it.next().getIdProduct() == auxId) {

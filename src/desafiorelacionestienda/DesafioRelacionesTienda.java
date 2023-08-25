@@ -7,14 +7,16 @@ import java.util.Scanner;
 public class DesafioRelacionesTienda {
 
     public static void main(String[] args) {
-
-        Scanner sc = new Scanner(System.in).useDelimiter("\n");
+        // EN EL ESCANER LE SAQUE EL USEDELIMITER XQ ME TIRABA ERROR Y LO REEMPLAZE POR UN NEXTLINE
+        // DESPUES DE CADA NEXTINT.
+        Scanner sc = new Scanner(System.in);
 
         StoreService stS = new StoreService();
         ProductService prodS = new ProductService();
 
         System.out.println("Cuantos prods queres ingresar?");
         int opcionCrearProds = sc.nextInt();
+        sc.nextLine();
 
         for (int i = 0; i < opcionCrearProds; i++) {
             prodS.crearProducto();
@@ -34,6 +36,7 @@ public class DesafioRelacionesTienda {
 
         System.out.println("Cuántas tiendas queres crear?");
         int opcionCrearTiendas = sc.nextInt();
+        sc.nextLine();
 
         for (int i = 0; i < opcionCrearTiendas; i++) {
                stS.crearTienda();
@@ -43,10 +46,12 @@ public class DesafioRelacionesTienda {
         stS.mostrarTienda();
         stS.modificarTienda();
         stS.eliminarTienda();
-        stS.agregarProducto( prodS.mostrarProductos(),  stS.mostrarTienda().get(1));
-        stS.VenderProductos(prodS.mostrarProductos(),  stS.mostrarTienda().get(2));
-        stS.eliminarProductos(prodS.mostrarProductos(),  stS.mostrarTienda().get(3));
-        stS.StockProductos(stS.mostrarTienda().get(3));
+        // CUANDO ELIMINAS UNA TIENDA QUEDA EN LA LISTA 0 Y 1
+        stS.agregarProducto( prodS.mostrarProductos(),  stS.mostrarTienda().get(0));
+        stS.VenderProductos(prodS.mostrarProductos(),  stS.mostrarTienda().get(1));
+        stS.eliminarProductos(prodS.mostrarProductos(),  stS.mostrarTienda().get(1));
+        stS.StockProductos(stS.mostrarTienda().get(1));
+        sc.close();
     }
 
 }
