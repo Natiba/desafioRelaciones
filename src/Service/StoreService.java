@@ -22,10 +22,10 @@ public class StoreService {
         t.setIdTienda(uuid);
 
         System.out.println("Ingrese la dirección");
-        t.setDireccion(sc.next());
+        t.setDireccion(sc.next().toUpperCase());
 
         System.out.println("Ingrese el nombre del representante");
-        t.setRepresentanteDeLaTienda(sc.next());
+        t.setRepresentanteDeLaTienda(sc.next().toUpperCase());
 
         listaTiendas.add(t);
         //return t;
@@ -36,7 +36,7 @@ public class StoreService {
     }
 
     public void modificarTienda() {
-        System.out.println("Ingrese el id de tienda a modificar");
+        System.out.println("Ingrese el id de tienda a modificar \n");
         System.out.println(mostrarTienda());
         System.out.println("Elija una tienda \n"
                 + "1.Tienda 1 \n"
@@ -48,20 +48,24 @@ public class StoreService {
         UUID mod = this.listaTiendas.get(opcionTienda).getIdTienda();
         for (Store t : this.listaTiendas) {
             if (t.getIdTienda() == mod) {
-                System.out.println("Que quiere modificar, ingrese 1 para dirección o 2 para representante");
+                System.out.println("Que quiere modificar? \n"
+                        + " 1.  Dirección \n"
+                        + "2.  Representante \n");
                 int opc = sc.nextInt();
                 switch (opc) {
                     case 1:
-                        System.out.println("ingrese la nueva dirección");
-                        System.out.println("El nombre anterior era" + t.getDireccion());
+                        System.out.println("El nombre anterior era " + t.getDireccion());
+                        System.out.println("ingrese la nueva dirección \n");
+                        
                         t.setDireccion(sc.next());
-                        System.out.println("El nombre nuevo es" + t.getDireccion());
+                        System.out.println("El nombre nuevo es " + t.getDireccion());
                         break;
                     case 2:
-                        System.out.println("ingrese el nuevo representante");
-                        System.out.println("El representante anterior era" + t.getRepresentanteDeLaTienda());
+                         System.out.println("El representante anterior era " + t.getRepresentanteDeLaTienda());
+                        System.out.println("ingrese el nuevo representante \n");
+                       
                         t.setRepresentanteDeLaTienda(sc.next());
-                        System.out.println("El representante nuevo es" + t.getRepresentanteDeLaTienda());
+                        System.out.println("El representante nuevo es " + t.getRepresentanteDeLaTienda());
                         break;
                     default:
                         System.out.println("No ha ingresado una opción válida /n");
@@ -72,7 +76,7 @@ public class StoreService {
     }
 
     public void eliminarTienda() {
-        System.out.println("Ingrese el id de la tienda a eliminar");
+        System.out.println("Ingrese el id de la tienda a eliminar (0-1-2)");
         System.out.println(mostrarTienda());
         UUID mod = this.listaTiendas.get(sc.nextInt()).getIdTienda();
         for (Store t : this.listaTiendas) {
@@ -85,13 +89,13 @@ public class StoreService {
     }
 
     public void agregarProducto(ArrayList<Product> p, Store t) {
-        System.out.println("Que producto quiere agregar, ingrese el id");
+        System.out.println("Que producto quiere agregar, ingrese el id \n");
         System.out.println(p);
         int idProd = sc.nextInt();
         for (Product producto : p) {
             if (producto.getIdProduct() == idProd) {
-                System.out.println("Ingrese la cantidad del producto");
-               Integer qty = sc.nextInt();
+                System.out.println("Ingrese la cantidad del producto, por favor \n");
+               Integer qty = sc.nextInt()-1;
                 t.getListaDeProductos().put(producto, qty);
             }
         }

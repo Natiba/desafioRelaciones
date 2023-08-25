@@ -12,44 +12,87 @@ public class DesafioRelacionesTienda {
 
         StoreService stS = new StoreService();
         ProductService prodS = new ProductService();
-
-        System.out.println("Cuantos prods queres ingresar?");
-        int opcionCrearProds = sc.nextInt();
-
-        for (int i = 0; i < opcionCrearProds; i++) {
-            prodS.crearProducto();
-        }
-
-        System.out.println("---------");
-        prodS.mostrarProductos();
-        System.out.println("---------");
-        prodS.modificarProducto();
-        System.out.println("---------");
-        prodS.mostrarProductos();
-        System.out.println("---------");
-        prodS.eliminarProducto();
-        System.out.println("---------");
-        prodS.mostrarProductos();
-        System.out.println("---------");
-
-        System.out.println("Cuántas tiendas queres crear?");
-        int opcionCrearTiendas = sc.nextInt();
-
-        for (int i = 0; i < opcionCrearTiendas; i++) {
-               stS.crearTienda();
-        }
+  
+          System.out.println("Primero vamos a crear 3 tiendas");
+          
+           for (int i = 0; i < 3; i++) {
+                        stS.crearTienda();
+                        
+                         System.out.println("Acá vamos a crear 15 productos para cada tienda");
         
-     
-        stS.mostrarTienda();
-        stS.modificarTienda();
-        stS.eliminarTienda();
-        stS.agregarProducto( prodS.mostrarProductos(),  stS.mostrarTienda().get(1));
-        stS.VenderProductos(prodS.mostrarProductos(),  stS.mostrarTienda().get(2));
-        stS.eliminarProductos(prodS.mostrarProductos(),  stS.mostrarTienda().get(3));
-        stS.StockProductos(stS.mostrarTienda().get(3));
-    }
+          for (int j = 0; j < 3; j++) {
+                        prodS.crearProducto();
+                    }
+                        
+                    }
+          
+        int opcionMenu = 0;
 
+//        System.out.println("MENU: \n"
+//                + "1. Crear 15 Productos \n"
+//                + "2. Crear 3 tiendas \n"
+//                + "3. Salir del menú");
+        do {
+
+            System.out.println("\n Ingrese opción del Menú \n");
+
+                System.out.println("MENÚ: \n"
+                        + "1. Mostrar listado de productos \n"
+                        + "2. Modificar un producto \n"
+                        + "3. Eliminar un producto \n"
+                        + "4. Mostrar Listado de Tiendas \n"
+                        + "5. Modificar una Tienda\n"
+                        + "6. Eliminar una Tienda \n"
+                        + "7. Agregar Productos en determinada Tienda \n"
+                        + "8. Vender Productos en determinada Tienda \n"
+                        + "9. Eliminar Productos en determinada Tienda \n"
+                        + "10. Chequear Stock de Productos en determinada Tienda \n"
+                        + "11. Salir del menú");
+
+            opcionMenu = sc.nextInt();
+
+            switch (opcionMenu) {
+                case 1:
+                    System.out.println( prodS.mostrarProductos());
+                    break;
+                case 2:
+                   prodS.modificarProducto();
+                    break;
+                case 3:
+                    prodS.eliminarProducto();
+                    break;
+                case 4:
+                    System.out.println(stS.mostrarTienda());
+                    break;
+                case 5:
+                    stS.modificarTienda();
+                    break;
+                case 6:
+                    stS.eliminarTienda();
+                    break;
+                case 7:
+                     stS.agregarProducto(prodS.mostrarProductos(), stS.mostrarTienda().get(0)); // recordar q empiezan en 0
+                    break;
+                case 8:
+                     stS.VenderProductos(prodS.mostrarProductos(), stS.mostrarTienda().get(1));  // recordar q empiezan en 0
+                    break;
+                case 9:
+                    stS.eliminarProductos(prodS.mostrarProductos(), stS.mostrarTienda().get(2));  // recordar q empiezan en 0
+                    break;
+                case 10:
+                    stS.StockProductos(stS.mostrarTienda().get(2));  // recordar q empiezan en 0
+                    break;
+                case 11:
+                   System.exit(0);
+                    break;
+                default:
+                    System.out.println("Ingresar una opción válida, por favor");
+            }
+        } while (opcionMenu != 11);
+        
+                }
 }
+         
 
 //Se necesita una app para una cadena de tiendas en la cual queremos almacenar los distintos productos que 
 //venderemos y el precio que tendran,

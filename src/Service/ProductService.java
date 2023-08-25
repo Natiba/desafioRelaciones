@@ -49,14 +49,16 @@ public class ProductService {
 
                 switch (opc) {
                     case 1:
-                        System.out.println("ingrese el nuevo nombre \n");
                         System.out.println("El nombre anterior era " + p.getName());
+                        System.out.println("ingrese el nuevo nombre \n");
+                        
                         p.setName(sc.next());
                         System.out.println("El nombre nuevo es " + p.getName());
                         break;
                     case 2:
+                         System.out.println("El precio anterior era " + p.getPrice());
                         System.out.println("ingrese el nuevo precio");
-                        System.out.println("El precio anterior era " + p.getPrice());
+                       
                         p.setPrice(sc.nextDouble());
                         System.out.println("El precio nuevo es " + p.getPrice());
                         break;
@@ -72,14 +74,16 @@ public class ProductService {
 
     public void eliminarProducto() {
 
-        System.out.println("Que producto desea eliminar? Ingrese ID");
+        System.out.println("Qué producto desea eliminar? Ingrese ID");
         System.out.println(mostrarProductos());
-        int auxId = sc.nextInt();
+        int auxId = sc.nextInt()-1;  // Le resto 1 así coincide con lo q escribe el usuario
 
         Iterator<Product> it = listaProductos.iterator();
         while (it.hasNext()) {
-            if (it.next().getIdProduct() == auxId) {
+            if (it.next().getIdProduct() == auxId) { // Aca se rompe si pongo el ultimo ID porque empieza a contar de 0
                 it.remove();
+                System.out.println("El producto " + it.next().getName().toUpperCase() + " con ID " + (auxId+1) + " ha sido eliminado correctamente \n");
+                // Acá le cambie de nuevo el ID + 1, sino tomaba uno menos, ahora sí coincide con lo q escribe el usuario
             }
         }
         System.out.println(mostrarProductos());
